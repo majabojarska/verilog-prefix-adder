@@ -1,0 +1,70 @@
+$date
+	Mon May 25 09:02:08 2020
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	100ms
+$end
+$scope module sum_tb $end
+$var wire 6 ! g [5:0] $end
+$var wire 6 " p [5:0] $end
+$var wire 7 # s [6:0] $end
+$var wire 6 $ h [5:0] $end
+$var reg 6 % x [5:0] $end
+$var reg 6 & y [5:0] $end
+$scope module isum $end
+$var wire 6 ' g [5:0] $end
+$var wire 6 ( p [5:0] $end
+$var wire 6 ) x [5:0] $end
+$var wire 6 * y [5:0] $end
+$var wire 7 + s [6:0] $end
+$var wire 6 , h [5:0] $end
+$scope begin genblk1[0] $end
+$upscope $end
+$scope begin genblk1[1] $end
+$upscope $end
+$scope begin genblk1[2] $end
+$upscope $end
+$scope begin genblk1[3] $end
+$upscope $end
+$scope begin genblk1[4] $end
+$upscope $end
+$scope begin genblk1[5] $end
+$upscope $end
+$scope begin genblk2[1] $end
+$upscope $end
+$scope begin genblk2[3] $end
+$upscope $end
+$scope begin genblk2[5] $end
+$upscope $end
+$scope begin genblk3[1] $end
+$upscope $end
+$scope begin genblk3[2] $end
+$upscope $end
+$scope begin genblk3[3] $end
+$upscope $end
+$scope begin genblk3[4] $end
+$upscope $end
+$scope begin genblk3[5] $end
+$upscope $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+#0
+$dumpvars
+b11100 ,
+bx10 +
+b1001 *
+b10101 )
+bx1 (
+bx1 '
+b1001 &
+b10101 %
+b11100 $
+bx10 #
+bx1 "
+bx1 !
+$end
+#100
