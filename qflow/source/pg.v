@@ -19,20 +19,17 @@ wire p, g;
 initial begin 
     $monitor ("inputs: x=%b, y=%b | outputs: g=%b, p=%b", x, y, g, p);
     
-    x = 0;
-    y = 0;
-    
-    #5 x = 0;
-    #5 y = 1;
-    
-    #10 x = 1;
-    #10 y = 0;
-    
-    #15 $finish;
-    #15 x = 1;
-    #15 y = 1;
+    {x, y} = 2'b00;
+    #1 {x, y} = 2'b01;
+    #1 {x, y} = 2'b10;
+    #1 {x, y} = 2'b11;
 end
 
+initial begin
+    #10 $finish;
+end
+
+// UUT
 pg U0 (
     .x (x),
     .y (y),
