@@ -1,2 +1,7 @@
 **/*.out
 **/*.vcd
+
+**/test
+**/venv
+**/__pycache__
+**/*.pyc
