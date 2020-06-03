@@ -7,7 +7,10 @@ reg x, y, c_in;
 wire gen, prop;
 
 initial begin 
-    $monitor ("inputs: x=%b, y=%b, c_in=%b | outputs: gen=%b, prop=%b", x, y, c_in, gen, prop);
+    $monitor (
+        "{\"x\":\"%b\", \"y\":\"%b\", \"c_in\":\"%b\", \"gen\":\"%b\", \"prop\":\"%b\"}", 
+        x, y, c_in, gen, prop
+    );
 
     {x, y, c_in} = 3'b000;
     #1 {x, y, c_in} = 3'b010;
