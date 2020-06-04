@@ -12,14 +12,10 @@ initial begin
         x, y, c_in, gen, prop
     );
 
-    {x, y, c_in} = 3'b000;
-    #1 {x, y, c_in} = 3'b010;
-    #1 {x, y, c_in} = 3'b100;
-    #1 {x, y, c_in} = 3'b110;
-    #1 {x, y, c_in} = 3'b001;
-    #1 {x, y, c_in} = 3'b011;
-    #1 {x, y, c_in} = 3'b101;
-    #1 {x, y, c_in} = 3'b111;
+    for(int i=0; i<2**3; i=i+1) begin
+        {x, y, c_in} = i;
+        #1;
+    end
 
     #1 $finish;
 end
