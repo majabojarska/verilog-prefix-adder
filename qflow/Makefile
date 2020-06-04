@@ -3,7 +3,7 @@ VERILOG_VERSION = '2012'
 
 run_tb: run_tb_prefix_adder run_tb_pg run_tb_pg_in run_tb_prefix_node
 
-test: run_tb
+test: clean run_tb
 	pytest
 
 test_dir: 
@@ -27,7 +27,7 @@ run_tb_prefix_node: test_dir
 
 clean_test:
 	cd test;\
-	find ./*.out -maxdepth 1 -type f -exec rm -iv {} \;
+	find ./*.out -maxdepth 1 -type f -exec rm -f {} \;
 
 clean: clean_test
 
