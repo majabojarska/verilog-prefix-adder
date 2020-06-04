@@ -36,85 +36,71 @@ def parse_data(data):
     return data
 
 
-@pytest.fixture(scope="function")
-def data_prefix_adder():
-    return get_data_from_tb_out(get_path_rel_to_module("./prefix_adder.out"))
+data_prefix_adder = get_data_from_tb_out(get_path_rel_to_module("./prefix_adder.out"))
+data_pg = get_data_from_tb_out(get_path_rel_to_module("./pg.out"))
+data_pg_in = get_data_from_tb_out(get_path_rel_to_module("./pg_in.out"))
+data_prefix_node = get_data_from_tb_out(get_path_rel_to_module("./prefix_node.out"))
 
 
-@pytest.fixture(scope="function")
-def data_pg():
-    return get_data_from_tb_out(get_path_rel_to_module("./pg.out"))
+@pytest.mark.parametrize("entry", data_prefix_adder)
+def test_prefix_adder(entry):
+    out_sum = entry["S"]
+    arg_x = entry["X"]
+    c_in = entry["c_in"]
+    arg_y = entry["Y"]
+    c_out = entry["c_out"]
+
+    if out_sum != arg_x + arg_y + c_in:
+        pytest.fail("Invalid sum: {}".format(entry))
+    if c_out != out_sum - out_sum % 2 ** 6:
+        pytest.fail("Invalid {}".format(entry))
 
 
-@pytest.fixture(scope="function")
-def data_pg_in():
-    return get_data_from_tb_out(get_path_rel_to_module("./pg_in.out"))
+@pytest.mark.parametrize("entry", data_pg)
+def test_pg(entry):
+    arg_x = entry["x"]
+    arg_y = entry["y"]
+    prop = entry["prop"]
+    gen = entry["gen"]
+
+    if gen != arg_x & arg_y:
+        pytest.fail("Invalid generation: {}".format(entry))
+    if prop != arg_x ^ arg_y:
+        pytest.fail("Invalid propagation: {}".format(entry))
 
 
-@pytest.fixture(scope="function")
-def data_prefix_node():
-    return get_data_from_tb_out(get_path_rel_to_module("./prefix_node.out"))
+@pytest.mark.parametrize("entry", data_pg_in)
+def test_pg_in(entry):
+    arg_x = entry["x"]
+    arg_y = entry["y"]
+    arg_c_in = entry["c_in"]
+    prop = entry["prop"]
+    gen = entry["gen"]
 
-
-def test_prefix_adder(data_prefix_adder):
-    for entry in data_prefix_adder:
-        out_sum = entry["S"]
-        arg_x = entry["X"]
-        c_in = entry["c_in"]
-        arg_y = entry["Y"]
-        c_out = entry["c_out"]
-
-        if out_sum != arg_x + arg_y + c_in:
-            pytest.fail("Invalid sum: {}".format(entry))
-        if c_out != out_sum - out_sum % 2 ** 6:
-            pytest.fail("Invalid {}".format(entry))
-
-
-def test_pg(data_pg):
-    for entry in data_pg:
-        arg_x = entry["x"]
-        arg_y = entry["y"]
-        prop = entry["prop"]
-        gen = entry["gen"]
-
-        if gen != arg_x & arg_y:
-            pytest.fail("Invalid generation: {}".format(entry))
-        if prop != arg_x ^ arg_y:
-            pytest.fail("Invalid propagation: {}".format(entry))
-
-
-def test_pg_in(data_pg_in):
-    for entry in data_pg_in:
-        arg_x = entry["x"]
-        arg_y = entry["y"]
-        arg_c_in = entry["c_in"]
-        prop = entry["prop"]
-        gen = entry["gen"]
-
-        if not (gen == arg_x & arg_y | (arg_c_in & (arg_x | arg_y))):
-            pytest.fail(
-                "Invalid generation: x={}, y={}, c_in={}, g={}".format(
-                    arg_x, arg_y, arg_c_in, gen
-                )
+    if not (gen == arg_x & arg_y | (arg_c_in & (arg_x | arg_y))):
+        pytest.fail(
+            "Invalid generation: x={}, y={}, c_in={}, g={}".format(
+                arg_x, arg_y, arg_c_in, gen
             )
-        if not (prop == arg_x ^ arg_y ^ arg_c_in):
-            pytest.fail(
-                "Invalid propagation: x={}, y={}, c_in={}, p={}".format(
-                    arg_x, arg_y, arg_c_in, prop
-                )
+        )
+    if not (prop == arg_x ^ arg_y ^ arg_c_in):
+        pytest.fail(
+            "Invalid propagation: x={}, y={}, c_in={}, p={}".format(
+                arg_x, arg_y, arg_c_in, prop
             )
+        )
 
 
-def test_prefix_node(data_prefix_node):
-    for entry in data_prefix_node:
-        gen_high = entry["GH"]
-        gen_low = entry["GL"]
-        prop_high = entry["PH"]
-        prop_low = entry["PL"]
-        gen_out = entry["GOUT"]
-        prop_out = entry["POUT"]
+@pytest.mark.parametrize("entry", data_prefix_node)
+def test_prefix_node(entry):
+    gen_high = entry["GH"]
+    gen_low = entry["GL"]
+    prop_high = entry["PH"]
+    prop_low = entry["PL"]
+    gen_out = entry["GOUT"]
+    prop_out = entry["POUT"]
 
-        if gen_out != gen_high | (prop_high & gen_low):
-            pytest.fail("Invalid generation: {}".format(entry))
-        if prop_out != prop_high & prop_low:
-            pytest.fail("Invalid propagation: {}".format(entry))
+    if gen_out != gen_high | (prop_high & gen_low):
+        pytest.fail("Invalid generation: {}".format(entry))
+    if prop_out != prop_high & prop_low:
+        pytest.fail("Invalid propagation: {}".format(entry))
