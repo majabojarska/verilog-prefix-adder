@@ -16,7 +16,7 @@ def get_data_from_tb_out(tb_out_path: str):
     stdout_str = stdout.decode("utf-8")
     lines = stdout_str.replace("'", '"').split("\n")
     data = []
-    for line in lines[0: len(lines) - 2]:
+    for line in lines[0: len(lines) - 1]:
         next_data = json.loads(line)
         data.append(next_data)
 
