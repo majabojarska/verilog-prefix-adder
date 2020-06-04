@@ -4,7 +4,7 @@ VERILOG_VERSION = '2012'
 run_tb: run_tb_prefix_adder run_tb_pg run_tb_pg_in run_tb_prefix_node
 
 test: clean run_tb
-	pytest
+	pytest -n auto
 
 test_dir: 
 	mkdir -p test;
@@ -27,7 +27,8 @@ run_tb_prefix_node: test_dir
 
 clean_test:
 	cd test;\
-	find ./*.out -maxdepth 1 -type f -exec rm -f {} \;
+	rm -f *.out;\
+	rm -rf .pytest_cache __pycache__
 
 clean: clean_test
 
