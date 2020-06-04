@@ -48,12 +48,9 @@ def test_prefix_adder(entry):
     arg_x = entry["X"]
     c_in = entry["c_in"]
     arg_y = entry["Y"]
-    c_out = entry["c_out"]
 
     if out_sum != arg_x + arg_y + c_in:
         pytest.fail("Invalid sum: {}".format(entry))
-    if c_out != out_sum - out_sum % 2 ** 6:
-        pytest.fail("Invalid {}".format(entry))
 
 
 @pytest.mark.parametrize("entry", data_pg)

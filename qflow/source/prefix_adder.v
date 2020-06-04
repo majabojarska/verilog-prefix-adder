@@ -3,15 +3,14 @@
 `include "prefix_node.v"
 
 module prefix_adder (
-    X, Y, c_in, S, c_out
+    X, Y, c_in, S
 );
 
 input [5:0] X;
 input [5:0] Y;
 input c_in;
 
-output [5:0] S; // Sum
-output c_out;
+output [6:0] S; // Sum
 
 // PG block outputs, p - propagation, g - generation.
 wire [5:0] pg_out_p;
@@ -101,7 +100,6 @@ assign S[2] = node_out_p[3] ^ node_out_g[0];
 assign S[3] = node_out_p[4] ^ node_out_g[3];
 assign S[4] = node_out_p[5] ^ node_out_g[4];
 assign S[5] = node_out_p[6] ^ node_out_g[5];
-
-assign c_out = node_out_g[6];
+assign S[6] = node_out_g[6];
 
 endmodule
