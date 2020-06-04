@@ -16,7 +16,7 @@ def get_data_from_tb_out(tb_out_path: str):
     stdout_str = stdout.decode("utf-8")
     lines = stdout_str.replace("'", '"').split("\n")
     data = []
-    for line in lines[0 : len(lines) - 2]:
+    for line in lines[0: len(lines) - 2]:
         next_data = json.loads(line)
         data.append(next_data)
 
@@ -34,14 +34,6 @@ def parse_data(data):
                 base = 2
             entry[key] = int(entry[key], base=base)
     return data
-
-
-#
-# def prep_data_for_parametrization(data):
-#     data_prepped = []
-#     for entry in data:
-#         data_prepped.append(tuple(value for key, value in entry if key != "time"))
-#     return data_prepped
 
 
 @pytest.fixture(scope="function")
