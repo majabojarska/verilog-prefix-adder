@@ -4,7 +4,7 @@ module pg (
 );
 
 
-assign gen = x && y;
+assign gen = x & y;
 assign prop = x ^ y;
 
 endmodule
