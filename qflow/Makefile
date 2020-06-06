@@ -11,19 +11,19 @@ test_dir:
    
 run_tb_prefix_adder: test_dir
 	cd source;\
-	iverilog $(WARNINGS) -g$(VERILOG_VERSION) -o ../test/prefix_adder.out prefix_adder_tb.v 
+	iverilog $(WARNINGS) -g$(VERILOG_VERSION) -o ../test/prefix_adder.out tb_prefix_adder.v 
 
 run_tb_pg: test_dir
 	cd source;\
-	iverilog $(WARNINGS) -g$(VERILOG_VERSION) -o ../test/pg.out pg_tb.v
+	iverilog $(WARNINGS) -g$(VERILOG_VERSION) -o ../test/pg.out tb_pg.v
 
 run_tb_pg_in: test_dir
 	cd source;\
-	iverilog $(WARNINGS) -g$(VERILOG_VERSION) -o ../test/pg_in.out pg_in_tb.v
+	iverilog $(WARNINGS) -g$(VERILOG_VERSION) -o ../test/pg_in.out tb_pg_in.v
 
 run_tb_prefix_node: test_dir
 	cd source;\
-	iverilog $(WARNINGS) -g$(VERILOG_VERSION) -o ../test/prefix_node.out prefix_node_tb.v
+	iverilog $(WARNINGS) -g$(VERILOG_VERSION) -o ../test/prefix_node.out tb_prefix_node.v
 
 clean_test:
 	cd test;\
