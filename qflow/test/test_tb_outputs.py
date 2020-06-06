@@ -59,11 +59,14 @@ def test_pg(entry):
     arg_y = entry["y"]
     prop = entry["prop"]
     gen = entry["gen"]
+    half_sum = entry["half_sum"]
 
     if gen != arg_x & arg_y:
         pytest.fail("Invalid generation: {}".format(entry))
-    if prop != arg_x ^ arg_y:
+    if prop != arg_x | arg_y:
         pytest.fail("Invalid propagation: {}".format(entry))
+    if half_sum != arg_x ^ arg_y:
+        pytest.fail("Invalid half sum: {}".format(entry))
 
 
 @pytest.mark.parametrize("entry", data_pg_in)
