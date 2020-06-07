@@ -1,7 +1,6 @@
 **/*.out
 **/*.vcd
 
-qflow/test/*.out
 **/venv
 **/__pycache__
 **/*.pyc
