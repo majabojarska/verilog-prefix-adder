@@ -16,7 +16,7 @@ def get_data_from_tb_out(tb_out_path: str):
     stdout_str = stdout.decode("utf-8")
     lines = stdout_str.replace("'", '"').split("\n")
     data = []
-    for line in lines[0: len(lines) - 1]:
+    for line in lines[0 : len(lines) - 1]:
         next_data = json.loads(line)
         data.append(next_data)
 
@@ -49,8 +49,7 @@ def test_prefix_adder(entry):
     c_in = entry["c_in"]
     arg_y = entry["Y"]
 
-    if out_sum != arg_x + arg_y + c_in:
-        pytest.fail("Invalid sum: {}".format(entry))
+    assert out_sum == arg_x + arg_y + c_in, "Invalid sum: {}".format(entry)
 
 
 @pytest.mark.parametrize("entry", data_pg)
