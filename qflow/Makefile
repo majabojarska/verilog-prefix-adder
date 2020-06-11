@@ -54,7 +54,7 @@ run_tb_prefix_node: test_dir
 	cd source;\
 	iverilog $(WARNINGS) -g$(VERILOG_VERSION) -o ../test/prefix_node.out tb_prefix_node.v
 
-######## Unit tests
+######## Cleanup
 
 create_venv: clean_venv
 	virtualenv --python=python3 venv
@@ -62,8 +62,6 @@ create_venv: clean_venv
 
 clean_venv:
 	rm -rf venv	
-
-######## Cleaning
 
 clean_test:
 	cd test;\
