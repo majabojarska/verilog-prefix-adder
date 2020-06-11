@@ -20,7 +20,7 @@ initial begin
         {X, Y, c_in} = i;
         #1;
     end
-    
+
     #1 $finish;
 end
 
